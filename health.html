@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>ఆరోగ్య సమాచార</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body { font-family: Arial; margin:0; background:#fffaf0; color:#333;}
+    header, footer { background:#c0392b; color:white; text-align:center; padding:1rem; }
+    nav a { color:white; margin:0 10px;text-decoration:none; }
+    main { padding:2rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; }
+    .card { background:white; border-radius:8px; overflow:hidden; box-shadow:0 3px 6px rgba(0,0,0,0.1); }
+    .card img { width:100%; height:150px; object-fit:cover; }
+    .card-content { padding:1rem; }
+    .card-content h3 { margin:0 0 .5rem; }
+    .lang-toggle { position:absolute;top:10px;right:20px;background:white;color:black;padding:5px 10px;cursor:pointer;border-radius:5px;}
+  </style>
+</head>
+<body>
+  <div class="lang-toggle" onclick="toggleLanguage()">English</div>
+  <header>
+    <h1 id="page-title">ఆరోగ్య సమాచారం</h1>
+    <nav>
+      <a href="index.html"><i class="fas fa-home"></i> <span id="nav-home">హోం</span></a>
+      <a href="schemes.html"><i class="fas fa-landmark"></i> <span id="nav-schemes">పథకాలు</span></a>
+      <a href="farming.html"><i class="fas fa-tractor"></i> <span id="nav-farming">వ్యవసాయం</span></a>
+      <a href="news.html"><i class="fas fa-newspaper"></i> <span id="nav-news">వార్తలు</span></a>
+      <a href="prices.html"><i class="fas fa-rupee-sign"></i> <span id="nav-prices">ధరలు</span></a>
+    </nav>
+  </header>
+  <main>
+    <div class="card">
+      <img src="https://up.yimg.com/ib/th/id/OIP.52uSPSD0TAvm1FKRr2fIhwHaE8?pid=Api&rs=1&c=1&qlt=95&w=155&h=103" alt="Clean Water">
+      <div class="card-content">
+        <h3 id="health1-title">శుభ్రమైన నీరు</h3>
+        <p id="health1-desc">నిరంతరం శుద్ధీ చేయబడిన నీరు త్రాగండి / Drink clean water regularly.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://up.yimg.com/ib/th/id/OIP.nzaIDeBq8ECIUYoxGNxAhAHaH5?pid=Api&rs=1&c=1&qlt=95&w=98&h=104" alt="Hygiene">
+      <div class="card-content">
+        <h3 id="health2-title">వ్యక్తిగత పరిశుభ్రత</h3>
+        <p id="health2-desc">స్నానం, చేతులు శుభ్రపరిచుకోండి / Maintain personal hygiene.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://up.yimg.com/ib/th/id/OIP.9RurwJpxhu3GqBjYusX1xwHaHa?pid=Api&rs=1&c=1&qlt=95&w=107&h=107" alt="First Aid">
+      <div class="card-content">
+        <h3 id="health3-title">ఫస్ట్ ఏయిడ్</h3>
+        <p id="health3-desc">ఇల్లు వద్ద ఫస్ట్ ఏయిడ్ బాక్స్ ఉంచండి / Keep first aid kit.</p>
+      </div>
+    </div>
+  </main>
+  <footer>&copy; 2025 గ్రామ సమాచార పోర్టల్</footer>
+
+  <script>
+    let isTelugu = true;
+    function toggleLanguage() {
+      isTelugu = !isTelugu;
+      document.querySelector('.lang-toggle').innerText = isTelugu ? 'English' : 'తెలుగు';
+      document.getElementById('page-title').innerText = isTelugu ? 'ఆరోగ్య సమాచారం' : 'Health Info';
+      document.getElementById('health1-title').innerText = isTelugu ? 'శుభ్రమైన నీరు' : 'Clean Water';
+      document.getElementById('health1-desc').innerText = isTelugu ? 'నిరంతరం శుద్ధీ చేయబడిన నీరు త్రాగండి' : 'Drink clean water regularly.';
+      document.getElementById('health2-title').innerText = isTelugu ? 'వ్యక్తిగత పరిశుభ్రత' : 'Personal Hygiene';
+      document.getElementById('health2-desc').innerText = isTelugu ? 'స్నానం, చేతులు శుభ్రపరిచుకోండి' : 'Maintain personal hygiene.';
+      document.getElementById('health3-title').innerText = isTelugu ? 'ఫస్ట్ ఏయిడ్' : 'First Aid';
+      document.getElementById('health3-desc').innerText = isTelugu ? 'ఇల్లు వద్ద ఫస్ట్ ఏయిడ్ బాక్స్ ఉంచండి' : 'Keep first aid kit.';
+    }
+  </script>
+</body>
+</html>
