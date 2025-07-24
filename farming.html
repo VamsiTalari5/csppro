@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>వ్యవసాయ సలహాలు | Farming Tips</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body { font-family: Arial; margin:0; background:#eef9f3; color:#333;}
+    header, footer { background:#2e8b57; color:white; text-align:center; padding:1rem; }
+    nav a { color:white; margin: 0 10px; text-decoration:none; }
+    main { padding:2rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; }
+    .card { background:white; border-radius:8px; overflow:hidden; box-shadow:0 3px 6px rgba(0,0,0,0.1); }
+    .card img { width:100%; height:150px; object-fit:cover; }
+    .card-content { padding:1rem; }
+    .card-content h3 { margin:0 0 .5rem; }
+    .lang-toggle { position:absolute; top:10px; right:20px; background:white;color:black;padding:5px 10px;cursor:pointer;border-radius:5px;}
+  </style>
+</head>
+<body>
+  <div class="lang-toggle" onclick="toggleLanguage()">English</div>
+  <header>
+    <h1 id="page-title">వ్యవసాయ సలహాలు</h1>
+    <nav>
+      <a href="index.html"><i class="fas fa-home"></i> <span id="nav-home">హోం</span></a>
+      <a href="schemes.html"><i class="fas fa-landmark"></i> <span id="nav-schemes">పథకాలు</span></a>
+      <a href="news.html"><i class="fas fa-newspaper"></i> <span id="nav-news">వార్తలు</span></a>
+      <a href="health.html"><i class="fas fa-heartbeat"></i> <span id="nav-health">ఆరోగ్యం</span></a>
+      <a href="prices.html"><i class="fas fa-rupee-sign"></i> <span id="nav-prices">ధరలు</span></a>
+    </nav>
+  </header>
+  <main>
+    <div class="card">
+      <img src="https://up.yimg.com/ib/th/id/OIP.m60jgEIICibjIwby4KmNeAHaE8?pid=Api&rs=1&c=1&qlt=95&w=158&h=105" alt="Soil Testing">
+      <div class="card-content">
+        <h3 id="tip1-title">మట్టి పరీక్ష</h3>
+        <p id="tip1-desc">పంట సమయంలో మట్టిలో పోషకాలను తెలుసుకోండి / Know soil nutrients via testing.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://up.yimg.com/ib/th/id/OIP.Noxbpl_JA_jMUBJ1xC4ifAHaE8?pid=Api&rs=1&c=1&qlt=95&w=150&h=100" alt="Irrigation">
+      <div class="card-content">
+        <h3 id="tip2-title">ద్రవాధార పద్ధతులు</h3>
+        <p id="tip2-desc">మత్తశీల వితరణ ద్వారా నీటిని మరింత ఉపయోగించండి / Use drip irrigation.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://up.yimg.com/ib/th/id/OIP.gI0zpqEg3Qz0bVtQWVpMFgHaFT?pid=Api&rs=1&c=1&qlt=95&w=154&h=110" alt="Pest Control">
+      <div class="card-content">
+        <h3 id="tip3-title">పురుగుమందులు</h3>
+        <p id="tip3-desc">సరైన మోతాదులో పురుగుమందులు వాడండి / Use pesticides correctly.</p>
+      </div>
+    </div>
+  </main>
+  <footer>&copy; 2025 గ్రామ సమాచార పోర్టల్</footer>
+
+  <script>
+    let isTelugu = true;
+    function toggleLanguage() {
+      isTelugu = !isTelugu;
+      document.querySelector('.lang-toggle').innerText = isTelugu ? 'English' : 'తెలుగు';
+      document.getElementById('page-title').innerText = isTelugu ? 'వ్యవసాయ సలహాలు' : 'Farming Tips';
+      document.getElementById('tip1-title').innerText = isTelugu ? 'మట్టి పరీక్ష' : 'Soil Testing';
+      document.getElementById('tip1-desc').innerText = isTelugu ? 'పంట సమయంలో మట్టిలో పోషకాలను తెలుసుకోండి' : 'Know soil nutrients via testing.';
+      document.getElementById('tip2-title').innerText = isTelugu ? 'ద్రవాధార పద్ధతులు' : 'Irrigation';
+      document.getElementById('tip2-desc').innerText = isTelugu ? 'మత్తశీల వితరణ ద్వారా నీటిని మరింత ఉపయోగించండి' : 'Use drip irrigation.';
+      document.getElementById('tip3-title').innerText = isTelugu ? 'పురుగుమందులు' : 'Pest Control';
+      document.getElementById('tip3-desc').innerText = isTelugu ? 'సరైన మోతాదులో పురుగుమందులు వాడండి' : 'Use pesticides correctly.';
+    }
+  </script>
+</body>
+</html>
