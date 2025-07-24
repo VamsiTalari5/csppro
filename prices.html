@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>పంటల ధరలు | Crop Prices</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    header, footer {
+      background: #2e7d32;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .lang-toggle {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      background: white;
+      color: black;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    main {
+      padding: 2rem;
+    }
+    label, select {
+      font-size: 1rem;
+      margin-right: 10px;
+    }
+    select {
+      padding: 5px;
+    }
+    .prices-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background: white;
+    }
+    .prices-table th, .prices-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    .prices-table th {
+      background-color: #4caf50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-toggle" onclick="toggleLanguage()">English</div>
+  <header>
+    <h1 id="title">పంటల ధరలు</h1>
+  </header>
+
+  <main>
+    <label id="market-label" for="marketSelect">మార్కెట్ ఎంచుకోండి:</label>
+    <select id="marketSelect">
+      <option value="">-- మార్కెట్ ఎంచుకోండి --</option>
+    </select>
+
+    <table class="prices-table" id="pricesTable">
+      <thead>
+        <tr>
+          <th id="crop">పంట</th>
+          <th id="variety">వేరైటీ</th>
+          <th id="grade">గ్రేడ్</th>
+          <th id="min">కనిష్ఠ ధర</th>
+          <th id="max">గరిష్ఠ ధర</th>
+          <th id="modal">మోడల్ ధర</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr><td colspan="6">దయచేసి మార్కెట్ ఎంపిక చేయండి...</td></tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    &copy; 2025 గ్రామ సమాచార పోర్టల్
+  </footer>
+
+  <script>
+    let isTelugu = true;
+    const marketSelect = document.getElementById("marketSelect");
+    const tableBody = document.getElementById("tableBody");
+
+    const apiKey = "579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b";
+    const apiURL = "https://api.data.gov.in/resource/35985678-0d79-46b4-9ed6-6f13308a1d24?format=json&api-key=" + apiKey + "&filters[State]=andhra%20pradesh&limit=100";
+
+    function toggleLanguage() {
+      isTelugu = !isTelugu;
+      document.querySelector(".lang-toggle").innerText = isTelugu ? "English" : "తెలుగు";
+      document.getElementById("title").innerText = isTelugu ? "పంటల ధరలు" : "Crop Prices";
+      document.getElementById("market-label").innerText = isTelugu ? "మార్కెట్ ఎంచుకోండి:" : "Select Market:";
+      document.getElementById("crop").innerText = isTelugu ? "పంట" : "Crop";
+      document.getElementById("variety").innerText = isTelugu ? "వేరైటీ" : "Variety";
+      document.getElementById("grade").innerText = isTelugu ? "గ్రేడ్" : "Grade";
+      document.getElementById("min").innerText = isTelugu ? "కనిష్ఠ ధర" : "Min Price";
+      document.getElementById("max").innerText = isTelugu ? "గరిష్ఠ ధర" : "Max Price";
+      document.getElementById("modal").innerText = isTelugu ? "మోడల్ ధర" : "Modal Price";
+    }
+
+    async function loadMarketList() {
+      try {
+        const res = await fetch(apiURL);
+        const data = await res.json();
+        const markets = [...new Set(data.records.map(r => r.market))].sort();
+        markets.forEach(market => {
+          const option = document.createElement("option");
+          option.value = market;
+          option.textContent = market;
+          marketSelect.appendChild(option);
+        });
+      } catch (error) {
+        console.error("Error fetching markets:", error);
+      }
+    }
+
+    async function loadCropPrices(marketName) {
+      tableBody.innerHTML = "<tr><td colspan='6'>Loading...</td></tr>";
+      try {
+        const res = await fetch(`${apiURL}&filters[market]=${encodeURIComponent(marketName)}`);
+        const data = await res.json();
+        const records = data.records.slice(0, 10);
+        if (records.length === 0) {
+          tableBody.innerHTML = "<tr><td colspan='6'>No data available</td></tr>";
+          return;
+        }
+        tableBody.innerHTML = "";
+        records.forEach(r => {
+          const row = `<tr>
+            <td>${r.commodity}</td>
+            <td>${r.variety}</td>
+            <td>${r.grade}</td>
+            <td>${r.min_price}</td>
+            <td>${r.max_price}</td>
+            <td>${r.modal_price}</td>
+          </tr>`;
+          tableBody.innerHTML += row;
+        });
+      } catch (error) {
+        console.error("Error loading crop prices:", error);
+        tableBody.innerHTML = "<tr><td colspan='6'>Error loading data</td></tr>";
+      }
+    }
+
+    marketSelect.addEventListener("change", () => {
+      const selectedMarket = marketSelect.value;
+      if (selectedMarket) loadCropPrices(selectedMarket);
+    });
+
+    // Initial load
+    loadMarketList();
+  </script>
+</body>
+</html>
