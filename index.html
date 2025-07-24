@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="te">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>గ్రామ సమాచార పోర్టల్ | Village Info Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #e0f2f1, #ffffff);
+      color: #222;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: #004d40;
+      color: white;
+      padding: 1.2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .lang-toggle {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: #ffffff;
+      color: #004d40;
+      padding: 6px 14px;
+      cursor: pointer;
+      border-radius: 20px;
+      font-weight: bold;
+      border: 1px solid #004d40;
+      transition: 0.3s;
+    }
+
+    .lang-toggle:hover {
+      background: #004d40;
+      color: #ffffff;
+    }
+
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 1rem;
+      animation: fadeIn 1s ease;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #004d40;
+      border: 2px solid #004d40;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .navbar a:hover {
+      background-color: #004d40;
+      color: #ffffff;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    main h2 {
+      color: #00695c;
+      font-size: 28px;
+      margin-bottom: 1rem;
+    }
+
+    main p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    footer {
+      background-color: #004d40;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .navbar a {
+        width: 80%;
+        justify-content: center;
+      }
+
+      .lang-toggle {
+        top: 10px;
+        right: 10px;
+        font-size: 14px;
+        padding: 5px 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="lang-toggle" onclick="toggleLanguage()">English</div>
+
+  <header>
+    <h1 id="title">గ్రామ సమాచార పోర్టల్</h1>
+    <div class="navbar">
+      <a href="schemes.html" id="nav-schemes"><i class="fas fa-landmark"></i><span>పథకాలు</span></a>
+      <a href="farming.html" id="nav-farming"><i class="fas fa-tractor"></i><span>వ్యవసాయం</span></a>
+      <a href="health.html" id="nav-health"><i class="fas fa-notes-medical"></i><span>ఆరోగ్యము</span></a>
+      <a href="news.html" id="nav-news"><i class="fas fa-newspaper"></i><span>వార్తలు</span></a>
+      <a href="prices.html" id="nav-prices"><i class="fas fa-rupee-sign"></i><span>ధరలు</span></a>
+    </div>
+  </header>
+
+<main style="position: relative; min-height: calc(100vh - 120px);">
+  <!-- Background image -->
+  <div style="
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://up.yimg.com/ib/th/id/OIP.K1JzuBeHbJCTms47CY8VCgHaE8?pid=Api&rs=1&c=1&qlt=95&w=156&h=104') no-repeat center center;
+    background-size: cover;
+    opacity: 0.3;
+    z-index: 0;
+  "></div>
+
+  <!-- Content on top of image -->
+  <div style="position: relative; z-index: 1; padding: 3rem; text-align: center;">
+    <h2 id="welcome" style="font-size: 2rem;">గ్రామ అభివృద్ధికి సమాచార కేంద్రం</h2>
+    <p id="intro" style="margin-top: 1rem; font-size: 1.1rem;">
+      ఈ పోర్టల్ రైతులు, గ్రామస్తులు మరియు యువతకు ప్రభుత్వ పథకాలు, వ్యవసాయ సూచనలు, ఆరోగ్య సమాచారం, తాజా వార్తలు మరియు మార్కెట్ ధరల వివరాలను అందించేందుకు రూపొందించబడింది.
+    </p>
+  </div>
+</main>
+
+
+   <footer>
+    &copy; 2025 గ్రామ సమాచార పోర్టల్ | Village Info Portal
+  </footer>
+
+  <script>
+    let isTelugu = true;
+
+    function toggleLanguage() {
+      isTelugu = !isTelugu;
+      document.querySelector('.lang-toggle').innerText = isTelugu ? 'English' : 'తెలుగు';
+      document.getElementById('title').innerText = isTelugu ? 'గ్రామ సమాచార పోర్టల్' : 'Village Information Portal';
+      document.getElementById('nav-schemes').innerHTML = isTelugu ? '<i class="fas fa-landmark"></i> పథకాలు' : '<i class="fas fa-landmark"></i> Schemes';
+      document.getElementById('nav-farming').innerHTML = isTelugu ? '<i class="fas fa-tractor"></i> వ్యవసాయం' : '<i class="fas fa-tractor"></i> Farming';
+      document.getElementById('nav-health').innerHTML = isTelugu ? '<i class="fas fa-notes-medical"></i> ఆరోగ్యము' : '<i class="fas fa-notes-medical"></i> Health';
+      document.getElementById('nav-news').innerHTML = isTelugu ? '<i class="fas fa-newspaper"></i> వార్తలు' : '<i class="fas fa-newspaper"></i> News';
+      document.getElementById('nav-prices').innerHTML = isTelugu ? '<i class="fas fa-rupee-sign"></i> ధరలు' : '<i class="fas fa-rupee-sign"></i> Prices';
+      document.getElementById('welcome').innerText = isTelugu ? 'గ్రామ అభివృద్ధికి సమాచార కేంద్రం' : 'Information Hub for Village Development';
+      document.getElementById('intro').innerText = isTelugu ? 'ఈ పోర్టల్ రైతులు, గ్రామస్తులు మరియు యువతకు ప్రభుత్వ పథకాలు, వ్యవసాయ సూచనలు, ఆరోగ్య సమాచారం, తాజా వార్తలు మరియు మార్కెట్ ధరల వివరాలను అందించేందుకు రూపొందించబడింది.' : 'This portal provides schemes, farming tips, health info, latest news, and crop price details for farmers and rural citizens.';
+    }
+  </script>
+</body>
+
+</html>
