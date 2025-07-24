@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+  <meta charset="UTF-8">
+  <title>ప్రభుత్వ పథకాలు | Government Schemes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #006400;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+    }
+    .lang-toggle {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      background: white;
+      color: black;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .filters {
+      text-align: center;
+      margin: 1rem 0;
+    }
+    .filters button {
+      margin: 0 5px;
+      padding: 8px 15px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background-color: #ddd;
+    }
+    .filters button.active {
+      background-color: #006400;
+      color: white;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 1rem;
+    }
+    .card h3 {
+      color: #006400;
+    }
+    footer {
+      background: #006400;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 id="page-title">ప్రభుత్వ పథకాలు</h1>
+    <button class="lang-toggle" onclick="toggleLanguage()">English</button>
+  </header>
+
+  <div class="filters">
+    <button class="active" onclick="filterSchemes('all')">అన్నీ / All</button>
+    <button onclick="filterSchemes('central')">కేంద్రం / Central</button>
+    <button onclick="filterSchemes('state')">రాష్ట్రం / State</button>
+  </div>
+
+  <div class="container" id="scheme-container">
+    <!-- Schemes will be inserted dynamically -->
+  </div>
+
+  <footer>
+    &copy; 2025 గ్రామ సమాచార పోర్టల్ | Village Info Portal
+  </footer>
+
+  <script>
+    const isTeluguDefault = true;
+    let isTelugu = isTeluguDefault;
+
+    const schemes = [
+      {
+        category: "central",
+        en: {
+          name: "PM-Kisan",
+          description: "₹6000/year to farmers in three installments.",
+          eligibility: "All small and marginal farmers."
+        },
+        te: {
+          name: "పీఎం-కిసాన్",
+          description: "రైతులకు సంవత్సరానికి ₹6000 మూడు విడతల్లో అందజేయబడుతుంది.",
+          eligibility: "సన్నకారు మరియు చిన్నకారు రైతులు."
+        }
+      },
+      {
+        category: "central",
+        en: {
+          name: "PM Fasal Bima Yojana",
+          description: "Crop insurance against losses due to natural calamities.",
+          eligibility: "All farmers enrolled in notified areas."
+        },
+        te: {
+          name: "పీఎం పంట బీమా యోజన",
+          description: "ప్రకృతి విపత్తుల వల్ల జరిగిన నష్టాలపై పంటల బీమా.",
+          eligibility: "అనుమతించిన ప్రాంతాల్లో నమోదు చేసిన రైతులు."
+        }
+      },
+      {
+        category: "central",
+        en: {
+          name: "PMAY Gramin",
+          description: "Housing for all rural families by 2025.",
+          eligibility: "Rural poor families without pucca houses."
+        },
+        te: {
+          name: "పీఎం ఎయ్ గ్రామీణ్",
+          description: "2025 నాటికి గ్రామీణ పేదలకు ఇళ్ల నిర్మాణం.",
+          eligibility: "ఇళ్ల లేని గ్రామీణ పేద కుటుంబాలు."
+        }
+      },
+      {
+        category: "central",
+        en: {
+          name: "Atmanirbhar Bharat",
+          description: "Support for agriculture infrastructure and MSMEs.",
+          eligibility: "Farmers, agri startups, MSMEs."
+        },
+        te: {
+          name: "ఆత్మనిర్భర్ భారత్",
+          description: "వ్యవసాయ మౌలిక సదుపాయాలు మరియు ఎంఎస్ఎంఈలకు మద్దతు.",
+          eligibility: "రైతులు, వ్యవసాయ స్టార్టప్‌లు, ఎంఎస్ఎంఈలు."
+        }
+      },
+      {
+        category: "central",
+        en: {
+          name: "PM Ujjwala Yojana",
+          description: "Free LPG connections to BPL households.",
+          eligibility: "Women from BPL families."
+        },
+        te: {
+          name: "పీఎం ఉజ్వలా యోజన",
+          description: "బీపిఎల్ కుటుంబాలకు ఉచిత ఎల్పిజి కనెక్షన్లు.",
+          eligibility: "బీపిఎల్ కుటుంబాలకు చెందిన మహిళలు."
+        }
+      },
+      {
+        category: "state",
+        en: {
+          name: "Aadabidda Nidhi Scheme",
+          description: "Financial support for women from poor families.",
+          eligibility: "Women from economically weaker sections."
+        },
+        te: {
+          name: "ఆడబిడ్డ నిధి పథకం",
+          description: "పేద కుటుంబాల మహిళలకు ఆర్థిక సహాయం.",
+          eligibility: "ఆర్థికంగా బలహీన వర్గాల మహిళలు."
+        }
+      },
+      {
+        category: "state",
+        en: {
+          name: "Nirudyoga Bruthi",
+          description: "Monthly support to unemployed youth.",
+          eligibility: "Unemployed youth 22–35 registered with employment exchanges."
+        },
+        te: {
+          name: "నిరుద్యోగ భృతి",
+          description: "నిరుద్యోగ యువతకు నెలవారీ ఆర్థిక మద్దతు.",
+          eligibility: "22–35 వయస్సు గల నిరుద్యోగ యువత ఉద్యోగ మార్గదర్శకాలలో నమోదు చేయబడాలి."
+        }
+      },
+      {
+        category: "state",
+        en: {
+          name: "APSRTC Free Bus Scheme",
+          description: "Free travel for women in APSRTC buses.",
+          eligibility: "Women residents of AP for travel in RTC buses."
+        },
+        te: {
+          name: "ఏపీఎస్ఆర్టీసీ ఉచిత బస్ పథకం",
+          description: "ఆంధ్రప్రదేశ్ మహిళలకు RTC బస్సుల్లో ఉచిత ప్రయాణం.",
+          eligibility: "ఆంధ్రప్రదేశ్ నివాసిత మహిళలు."
+        }
+      }
+      // Add more schemes here...
+    ];
+
+    function renderSchemes(filter = 'all') {
+      const container = document.getElementById('scheme-container');
+      container.innerHTML = '';
+      schemes.forEach(scheme => {
+        if (filter === 'all' || scheme.category === filter) {
+          const info = isTelugu ? scheme.te : scheme.en;
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <h3>${info.name}</h3>
+            <p><strong>${isTelugu ? 'వివరణ' : 'Description'}:</strong> ${info.description}</p>
+            <p><strong>${isTelugu ? 'అర్హత' : 'Eligibility'}:</strong> ${info.eligibility}</p>
+          `;
+          container.appendChild(card);
+        }
+      });
+    }
+
+    function toggleLanguage() {
+      isTelugu = !isTelugu;
+      document.querySelector('.lang-toggle').innerText = isTelugu ? 'English' : 'తెలుగు';
+      document.getElementById('page-title').innerText = isTelugu ? 'ప్రభుత్వ పథకాలు' : 'Government Schemes';
+      renderSchemes(currentFilter);
+    }
+
+    let currentFilter = 'all';
+    function filterSchemes(category) {
+      currentFilter = category;
+      document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderSchemes(category);
+    }
+
+    renderSchemes();
+  </script>
+</body>
+</html>
